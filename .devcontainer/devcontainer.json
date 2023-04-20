@@ -11,7 +11,8 @@
   // oder auf einem Dockerfile aufsetzen
   //"build": { "dockerfile": "Dockerfile" },
   
-  "features": {
+"features": {
+	  //"ghcr.io/devcontainers/features/docker-in-docker:2": {}
     // add docker-in-docker feature
     "ghcr.io/devcontainers/features/docker-in-docker": {},
     "ghcr.io/devcontainers/features/node:1": {
