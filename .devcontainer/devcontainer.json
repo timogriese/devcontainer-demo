@@ -6,10 +6,10 @@
   
   // direkt von einem Image ableiten
   //"image": "mcr.microsoft.com/devcontainers/universal:2",
-  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
+  //"image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
 
   // oder auf einem Dockerfile aufsetzen
-  //"build": { "dockerfile": "Dockerfile" },
+  "build": { "dockerfile": "Dockerfile" },
   
 "features": {
 	  //"ghcr.io/devcontainers/features/docker-in-docker:2": {}
