@@ -1,0 +1,4 @@
+deb [signed-by=/usr/share/keyrings/lap_lvm.de.gpg] http://cs-repo.lvm.de/repos/ubuntu jammy main universe
+deb [signed-by=/usr/share/keyrings/lap_lvm.de.gpg] http://cs-repo.lvm.de/repos/ubuntu jammy-security main universe
+deb [signed-by=/usr/share/keyrings/lap_lvm.de.gpg] http://cs-repo.lvm.de/repos/ubuntu jammy-updates main universe
+deb [signed-by=/usr/share/keyrings/lap_lvm.de.gpg] http://cs-repo.lvm.de/repos/ubuntu jammy-backports main universe

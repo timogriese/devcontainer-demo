@@ -1,0 +1,4 @@
+deb [signed-by=/usr/share/keyrings/lap_lvm.de.gpg] http://cs-repo.lvm.de/repos/focal stable main
+deb [signed-by=/usr/share/keyrings/lap_lvm.de.gpg] http://cs-repo.lvm.de/repos/focal testing main
+deb [signed-by=/usr/share/keyrings/lap_lvm.de.gpg] http://cs-repo.lvm.de/repos/focal unstable main
+deb [signed-by=/usr/share/keyrings/lap_lvm.de.gpg] http://cs-repo.lvm.de/repos/focal experimental main

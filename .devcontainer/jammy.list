@@ -1,0 +1,4 @@
+deb [signed-by=/usr/share/keyrings/lap_lvm.de.gpg] http://cs-repo.lvm.de/repos/jammy stable main
+deb [signed-by=/usr/share/keyrings/lap_lvm.de.gpg] http://cs-repo.lvm.de/repos/jammy testing main
+deb [signed-by=/usr/share/keyrings/lap_lvm.de.gpg] http://cs-repo.lvm.de/repos/jammy unstable main
+deb [signed-by=/usr/share/keyrings/lap_lvm.de.gpg] http://cs-repo.lvm.de/repos/jammy experimental main

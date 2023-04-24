@@ -1,0 +1,64 @@
+#!/bin/sh
+# echo Nothing happens.
+# shellcheck shell=sh disable=SC2154
+# -*- mode: sh; indent-tabs-mode: nil; tab-width: 4; coding: utf-8 -*-
+# set -x
+set -e
+CS_REPO=10.225.66.167
+POOL="http://${CS_REPO}/repos/jammy/pool"
+if [ -x /usr/bin/wslpath ]; then
+	printf "Setup DNS Server ... \n"
+	gateway=$(ip -oneline route show default | sed -n -e '/^default via/ s/default via \([0-9\.]*\) dev .*$/\1/ p')
+	printf "Gateway %s found - using it for DNS resolution - " "$gateway"
+	if grep -q -F -e "$gateway" /etc/resolv.conf; then
+		printf "already configured\n"
+	else
+		printf "# Provided by setup-wsl\nnameserver %s\nnameserver 10.231.1.1\nsearch lvm.de\n" "$gateway" >/etc/resolv.conf
+		printf "done\n"
+	fi
+	cat /etc/resolv.conf
+fi
+tmpdir=$(mktemp --tmpdir --directory wsl-config.XXXXXXXXXX)
+# /var/www/aptly/public/wsl/pool/main/w/wsl-core/wsl-core_1.21_amd64.deb
+debcore=wsl-core_2.6_amd64.deb
+debsrc=wsl-sources_3.4_all.deb
+
+trap 'rc=$?; rm -f ${tmpdir}/${debcore} ${tmpdir}/${debsrc}; rmdir ${tmpdir}; trap 0; exit $rc' 0 1 2 3 15
+
+printf "Download initial wsl-core package ... "
+curl --silent --output "${tmpdir}/${debcore}" "${POOL}/main/w/wsl-core/${debcore}"
+printf "done\n"
+
+printf "Download initial package to configure apt repositories ... "
+curl --silent --output "${tmpdir}/${debsrc}" "${POOL}/main/w/wsl-sources/${debsrc}"
+printf "done\n"
+
+# Do not ask questions at this early stage
+export DEBIAN_FRONTEND=noninteractive
+
+printf "DPKG resume interrupted installations ... "
+dpkg --configure -a
+printf "done\n"
+printf "APT fix broken install ... "
+apt-get -y --fix-broken install
+printf "done\n"
+printf "Installing downloaded package ... \n"
+dpkg -i --force-confnew --force-confmiss "${tmpdir}/${debcore}" "${tmpdir}/${debsrc}"
+printf "done\n"
+
+printf "APT update ... "
+apt-get update
+printf "done\n"
+
+printf "APT full-upgrade ... "
+apt-get -y -o DPkg::Options::=--force-confnew -o DPkg::Options::=--force-confmiss full-upgrade
+printf "done\n"
+
+if [ -x /usr/bin/wslpath ]; then
+	echo Installing additional configuration "package(s)" "... "
+	apt-get -y -o DPkg::Options::=--force-confnew -o DPkg::Options::=--force-confmiss install --reinstall wsl-config
+	printf "done\n"
+else
+	printf "No additional packages required. WSL support is not installed\n."
+fi
+printf "All done.\n"

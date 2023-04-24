@@ -1,0 +1,4 @@
+deb [signed-by=/usr/share/keyrings/lap_lvm.de.gpg] http://cs-repo.lvm.de/repos/ubuntu focal main universe
+deb [signed-by=/usr/share/keyrings/lap_lvm.de.gpg] http://cs-repo.lvm.de/repos/ubuntu focal-security main universe
+deb [signed-by=/usr/share/keyrings/lap_lvm.de.gpg] http://cs-repo.lvm.de/repos/ubuntu focal-updates main universe
+deb [signed-by=/usr/share/keyrings/lap_lvm.de.gpg] http://cs-repo.lvm.de/repos/ubuntu focal-backports main universe
